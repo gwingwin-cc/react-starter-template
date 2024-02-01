@@ -15,6 +15,10 @@ export const HeaderMenu: React.FC = () => {
 				key: '/home',
 			},
 			{
+				label: <Link to={{ pathname: '/form-task' }}>Form Task</Link>,
+				key: '/form-task',
+			},
+			{
 				label: <Link to={{ pathname: '/profile' }}>Profile</Link>,
 				key: '/profile',
 			},

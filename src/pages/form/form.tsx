@@ -7,11 +7,12 @@ import { formApi } from '@services'
 import { FormOrder } from '@components/form'
 import { TableOrders } from '@components/table'
 import { FormTest } from '@components/form/form-test'
+import { FormTask } from '@components/form/form-task'
+import { TableTasks } from '@components/table/table-task'
 
 const { Text } = Typography
 
-export const HomeScreen: React.FC = () => {
-	const { data: options, loading: formLoading } = useRequest(formApi.getForms)
+export const FormScreen: React.FC = () => {
 	const [loading, isLoading] = useState<boolean>(false)
 
 	return (
@@ -23,29 +24,20 @@ export const HomeScreen: React.FC = () => {
 							<Image src={ambulanceActive} preview={false} height={18} />
 						</Space>
 						<Space className='text-xl'>บันทึกบ้อมูล</Space>
-						<Space>
-							<Select
-								className='w-64'
-								placeholder='Select form'
-								loading={formLoading}
-								options={options && options.list.map((option) => ({ value: option.id, label: option.name }))}
-							/>
-						</Space>
 					</Space>
 					<Divider />
-					{/* <FormOrder triggerOrderList={() => isLoading(true)} /> */}
-					<FormTest triggerOrderList={() => isLoading(true)} />
+					<FormTask triggerTaskList={() => isLoading(true)} />
 				</Card>
 			</Col>
 			<Col sm={16} xs={24}>
 				<Card bordered={false} className='h-full'>
 					<Space direction='vertical' className='w-full text-end'>
 						<Text className='text-xl text-atm-brandSky me-6'>
-							<FileTextOutlined /> Order list
+							<FileTextOutlined /> Task list
 						</Text>
 					</Space>
 					<Divider />
-					<TableOrders loading={loading} isLoading={isLoading} />
+					<TableTasks loading={loading} isLoading={isLoading} />
 				</Card>
 			</Col>
 		</Row>

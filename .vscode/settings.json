@@ -21,6 +21,6 @@
 	"less.validate": false,
 	"scss.validate": false,
 	"cSpell.ignoreRegExpList": ["/[\\u0E00-\\u0E7F]/g"],
-	"cSpell.words": ["antd", "Authen", "buddist"],
+	"cSpell.words": ["antd", "Authen", "buddist", "esbenp"],
 	"cSpell.ignorePaths": ["/src/mock"]
 }

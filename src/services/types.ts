@@ -144,3 +144,23 @@ export interface IOrderForm {
 	total?: number
 	createdByUser: string
 }
+
+export interface ITaskForm {
+	id?: number
+	recordState: string
+	recordType: string
+	errors?: null
+	createdAt: string
+	updatedAt: string
+	deletedAt?: string
+	createdBy: number
+	updatedBy: number
+	deletedBy?: number
+
+	title: string
+	contact_email: string
+	description: string
+	priority: number
+
+	createdByUser: string
+}

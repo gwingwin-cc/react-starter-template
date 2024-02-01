@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { prepareQuery, prepareQueryTable } from '@utils'
-import { IForm, IItemsPerPage, IOrderForm, IQuery } from './types'
+import { IForm, IItemsPerPage, IOrderForm, IQuery, ITaskForm } from './types'
 
 export class FormApi {
 	private source = axios.CancelToken.source()
@@ -42,7 +42,12 @@ export class FormApi {
 		return response.data
 	}
 
-	public createRecord = async (formId: number, data: IOrderForm): Promise<{ id: number }> => {
+	public getRecordTask = async (formId: number, recordId: number): Promise<ITaskForm> => {
+		const response = await this.ax.get(`/${formId}/records/${recordId}`)
+		return response.data
+	}
+
+	public createRecord = async (formId: number, data: IOrderForm | ITaskForm): Promise<{ id: number }> => {
 		// delete data.order_price
 		const createData = {
 			data,
@@ -53,7 +58,7 @@ export class FormApi {
 		return response.data
 	}
 
-	public updateRecord = async (formId: number, recordId: number, data: IOrderForm) => {
+	public updateRecord = async (formId: number, recordId: number, data: IOrderForm | ITaskForm) => {
 		const updateData = {
 			data,
 			recordState: 'ACTIVE',
