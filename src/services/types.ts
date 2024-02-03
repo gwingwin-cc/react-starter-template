@@ -160,7 +160,7 @@ export interface ITaskForm {
 	title: string
 	contact_email: string
 	description: string
-	priority: number
+	priority: number | { value: number; label: string }
 
 	createdByUser: string
 }

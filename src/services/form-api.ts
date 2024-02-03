@@ -43,7 +43,27 @@ export class FormApi {
 	}
 
 	public getRecordTask = async (formId: number, recordId: number): Promise<ITaskForm> => {
-		const response = await this.ax.get(`/${formId}/records/${recordId}`)
+		const response = await this.ax.get<ITaskForm>(`/${formId}/records/${recordId}`)
+		if (response.data) {
+			const { priority } = response.data
+			let result = ''
+			switch (priority) {
+				case 0:
+					result = 'ไม่ด่วน'
+					break
+				case 1:
+					result = 'ด่วน'
+					break
+				case 2:
+					result = 'ด่วนมาก'
+					break
+				default:
+					result = 'ไม่ด่วน'
+					break
+			}
+			return { ...response.data, priority: { value: Number(priority), label: result } }
+		}
+
 		return response.data
 	}
 

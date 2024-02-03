@@ -21,8 +21,6 @@ export const FormTask: React.FC<FormTaskProps> = ({ triggerTaskList, taskId }) =
 	const { handleError } = useError()
 	const [form] = Form.useForm<ITaskForm>()
 	const [loading, isLoading] = useState<boolean>(false)
-	const [initSelect, setInitSelect] = useState<{ value: number; label: string }>()
-	const [isReady, setIsReady] = useState<boolean>(false)
 
 	const {
 		data: dataTask,
@@ -35,27 +33,6 @@ export const FormTask: React.FC<FormTaskProps> = ({ triggerTaskList, taskId }) =
 				title: 'Failed to fetch form order record.',
 			}),
 	})
-
-	useEffect(() => {
-		if (dataTask?.priority) {
-			let result = 'อะไรนะ'
-			switch (dataTask.priority) {
-				case 0:
-					result = 'ไม่ด่วน'
-					break
-				case 1:
-					result = 'ด่วน'
-					break
-				case 2:
-					result = 'ด่วนมาก'
-					break
-				default:
-					result = 'อะไรนะ'
-					break
-			}
-			setInitSelect({ value: dataTask.priority, label: result })
-		}
-	}, [dataTask])
 
 	useEffect(() => {
 		if (taskId) {
@@ -91,14 +68,7 @@ export const FormTask: React.FC<FormTaskProps> = ({ triggerTaskList, taskId }) =
 	}
 
 	return (
-		<Form
-			form={form}
-			name='form-order'
-			layout='vertical'
-			onFinish={onFinish}
-			size='large'
-			initialValues={{ ...dataTask, priority: initSelect }}
-		>
+		<Form form={form} name='form-order' layout='vertical' onFinish={onFinish} size='large' initialValues={dataTask}>
 			<Row gutter={16}>
 				<Col span={12}>
 					<Form.Item name='title' label='Task title' rules={[{ required: true }]}>
